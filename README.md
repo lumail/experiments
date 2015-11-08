@@ -6,12 +6,6 @@ for prototype purposes during the course of developing lumail2.
 
 
 
-ui-demo
--------
-
-A simple `ncurses` program with a toggleable "status-panel".
-
-
 dynamic-calling
 ---------------
 
@@ -24,3 +18,19 @@ This example covers the case where:
 * This means the object is available to Lua via a user-data table.
 * The Lua-side defines an __additional__ method, to extend the object.
 * That method needs to be called by C++.
+
+
+observer
+--------
+
+Mock-up of a "Observer" pattern implementation which will suit
+lumail2.
+
+
+ui-demo
+-------
+
+A simple `ncurses` program with a toggleable "status-panel".
+
+
+
