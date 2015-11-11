@@ -77,6 +77,21 @@ std::vector<COLOUR_STRING *> parse_coloured_string(std::string input)
     }
 
     /*
+     * If input is non-empty then we have leading match.  Handle that
+     * as a special case.
+     */
+    if (! input.empty())
+    {
+        /*
+         * Allocate a structure to hold this match.
+         */
+        COLOUR_STRING *tmp = (COLOUR_STRING *)malloc(sizeof(COLOUR_STRING));
+        tmp->colour = new std::string("default");
+        tmp->string = new std::string(input);
+        results.push_back(tmp);
+    }
+
+    /*
      * Remember we searched backwards?  Reverse so all makes sense.
      */
     std::reverse(results.begin(), results.end());
