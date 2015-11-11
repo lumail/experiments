@@ -5,6 +5,13 @@ This repository contains a collection of sample code that was useful
 for prototype purposes during the course of developing lumail2.
 
 
+colour-string
+-------------
+
+A sample program to demonstrate how I think I can split up strings
+with embedded colour-information within them.  We need to be able
+to change the colour before drawing each "segment".
+
 
 dynamic-calling
 ---------------
