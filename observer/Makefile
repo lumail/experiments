@@ -1,6 +1,6 @@
 
 all:
-	g++ -o observer -std=c++11 main.cc config.cc
+	g++ -o observer -std=c++0x main.cc config.cc
 
 clean:
 	rm observer || true

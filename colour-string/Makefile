@@ -1,6 +1,6 @@
 
 colour-string: colour-string.cc
-	g++ -ggdb -o colour-string -std=c++11 colour-string.cc -lpcrecpp
+	g++ -ggdb -o colour-string -std=c++0x colour-string.cc -lpcrecpp
 
 clean:
 	rm colour-string || true
