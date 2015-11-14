@@ -4,6 +4,7 @@
 #include <regex>
 #include <string.h>
 #include <unistd.h>
+#include <pcrecpp.h>
 
 /**
  * We draw lines of colours.
@@ -46,10 +47,13 @@ std::vector<COLOUR_STRING *> parse_coloured_string(std::string input)
      * back of the string forward.  This is definitely the simpler
      * of the approaches I trialled.
      */
-    std::regex base_regex("^(.*)\\$\\[([a-zA-Z]+)\\](.*)$");
-    std::smatch base_match;
+    pcrecpp::RE re("^(.*)\\$\\[([a-zA-Z]+)\\](.*)$");
 
-    while (std::regex_match(input, base_match, base_regex))
+    std::string prefix;
+    std::string col;
+    std::string txt;
+
+    while (re.FullMatch(input, &prefix, &col, &txt))
     {
 
         /*
@@ -57,20 +61,11 @@ std::vector<COLOUR_STRING *> parse_coloured_string(std::string input)
          */
         COLOUR_STRING *tmp = (COLOUR_STRING *)malloc(sizeof(COLOUR_STRING));
 
-        std::ssub_match prefix_match = base_match[1];
-        std::string prefix = prefix_match.str();
-
-        std::ssub_match colour_match = base_match[2];
-        std::string colour = colour_match.str();
-
-        std::ssub_match str_match = base_match[3];
-        std::string str = str_match.str();
-
         /*
         * Save our match away.
         */
-        tmp->colour = new std::string(colour);
-        tmp->string = new std::string(str);
+        tmp->colour = new std::string(col);
+        tmp->string = new std::string(txt);
         results.push_back(tmp);
 
         input = prefix;
