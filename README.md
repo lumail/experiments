@@ -27,6 +27,13 @@ This example covers the case where:
 * That method needs to be called by C++.
 
 
+mime
+----
+
+A basic example of using `libmagic` to determine the MIME-type of
+a file, via content.
+
+
 observer
 --------
 
