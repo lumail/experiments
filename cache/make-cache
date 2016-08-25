@@ -1,0 +1,70 @@
+#!/usr/bin/perl -w
+#
+# Generate a cache-file containing five-million key+value pairs.
+#
+# Steve
+# --
+
+use strict;
+use warnings;
+
+
+my %ALL;
+
+
+sub rstr
+{
+    my( $length ) = (@_ );
+
+    my @chars = ("A".."Z", "a".."z", "\"");
+    my $string = "";
+    while( length($string)< $length)
+    {
+        $string .= $chars[rand @chars];
+    }
+    $string
+}
+
+
+#
+#  Generate the random keys
+#
+my $minimum = 2;
+my $maximum = 200;
+
+for( my $i = 0; $i < 100000; $i++ )
+{
+    my $key_len = $minimum + int(rand($maximum - $minimum));
+
+    my $key = rstr($key_len);
+    my $val = rstr($key_len * 3);
+
+    $ALL{$key} = $val;
+}
+
+#
+#  Now write out as two files
+#
+#
+#  1. ini-file
+#
+open( my $handle, ">", "cache.ini" );
+foreach my $key ( keys %ALL )
+{
+    print $handle $key . "=" . $ALL{$key} . "\n";
+}
+close( $handle );
+
+
+#
+#  2. record-file
+#
+open( my $handle2, ">", "cache.rec" );
+foreach my $key ( keys %ALL )
+{
+    my $val = $ALL{$key};
+    $key =~ s/"/\\"/g;
+    $val =~ s/"/\\"/g;
+    print $handle2 "CacheEntry{ key = \"$key\", val = \"$val\" };\n";
+}
+close( $handle2 );
