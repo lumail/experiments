@@ -4,6 +4,10 @@ Experiments
 This repository contains a collection of sample code that was useful
 for prototype purposes during the course of developing lumail2.
 
+cache
+-----
+
+Time two different approaches to loading our cache, to see which is faster.
 
 colour-string
 -------------
